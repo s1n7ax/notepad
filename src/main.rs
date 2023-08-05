@@ -82,7 +82,7 @@ mod test {
 
     use super::*;
 
-    pub async fn start<'a>(docker: &'a Cli) {
+    pub async fn start(docker: &Cli) {
         let container = start_postgres(docker);
         let db_port = container.get_host_port_ipv4(5432);
         let conn_str =
@@ -107,7 +107,7 @@ mod test {
         });
     }
 
-    pub fn start_postgres<'a>(docker: &'a Cli) -> Container<'a, GenericImage> {
+    pub fn start_postgres(docker: &Cli) -> Container<GenericImage> {
         let image = GenericImage::new("postgres", "latest")
             .with_env_var("POSTGRES_PASSWORD", "root")
             .with_env_var("POSTGRES_USER", "root")
